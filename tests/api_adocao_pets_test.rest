@@ -1,0 +1,81 @@
+### Variáveis de teste
+@baseUrl = http://localhost:3000
+@jwt = COLE_SEU_TOKEN_AQUI
+@pet_id = 1
+
+
+### LOGIN - obter token
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "123456"
+}
+
+### CADASTRO DE USUÁRIO
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Carlos da Silva",
+  "email": "carlos@example.com",
+  "password": "123456",
+  "phone": "555-9876",
+  "role": "adopter"
+}
+
+### LISTAR PETS DISPONÍVEIS
+GET {{baseUrl}}/pets/available
+
+### LISTAR TODOS OS PETS (admin)
+GET {{baseUrl}}/pets
+Authorization: Bearer {{jwt}}
+
+### CADASTRAR NOVO PET (admin)
+POST {{baseUrl}}/pets
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "name": "Bidu",
+  "age": 2,
+  "species": "dog",
+  "size": "small",
+  "description": "Cãozinho azul esperto"
+}
+
+### ADOTAR PET
+POST {{baseUrl}}/adoptions
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "pet_id": {{pet_id}}
+}
+
+### LISTAR ADOÇÕES (admin)
+GET {{baseUrl}}/adoptions
+Authorization: Bearer {{jwt}}
+
+### BUSCAR PET POR ID
+GET {{baseUrl}}/pets/{{pet_id}}
+Authorization: Bearer {{jwt}}
+
+### ATUALIZAR PET
+PUT {{baseUrl}}/pets/{{pet_id}}
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+  "name": "Bidu Atualizado",
+  "age": 3,
+  "species": "dog",
+  "size": "medium",
+  "status": "available",
+  "description": "Atualizado por admin"
+}
+
+### DELETAR PET
+DELETE {{baseUrl}}/pets/{{pet_id}}
+Authorization: Bearer {{jwt}}
